@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hearing Assessment Report Tool</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
@@ -321,7 +321,7 @@
                       <button onClick={()=>setTab("form")} style={{ background:"white", color:B.purple, border:`1px solid ${B.purpleBorder}`, borderRadius:7, padding:"9px 16px", fontSize:12, cursor:"pointer" }}>← Edit Form</button>
                     </div>
 
-                    {/* PAGE 1 - FOOTER REMOVED */}
+                    {/* PAGE 1 */}
                     <div className="pdf-page" style={{ background:"white", display:"flex", flexDirection:"column" }}>
                       <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr} audiologistName={form.audiologistName} clientId={form.clientId} />
                       <GoldBar />
@@ -363,7 +363,7 @@
                       </div>
                     </div>
 
-                    {/* PAGE 2 - FOOTER REMOVED */}
+                    {/* PAGE 2 */}
                     <div className="pdf-page" style={{ background:"white", display:"flex", flexDirection:"column" }}>
                       <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr} audiologistName={form.audiologistName} clientId={form.clientId} />
                       <GoldBar />
@@ -408,7 +408,7 @@
                           </div>
                         </div>
 
-                        <div style={{ background:B.purple, borderRadius:9, padding:"12px 16px", marginTop: "auto", marginBottom: "26px" }}>
+                        <div style={{ background:B.purple, borderRadius:9, padding:"12px 16px", marginTop: "auto" }}>
                             <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:12, fontWeight:700, marginBottom:2 }}>You are not alone.</div>
                             <div style={{ color:"rgba(255,255,255,0.65)", fontSize:9.5, lineHeight:1.4 }}>Modern hearing technology is smaller, smarter and more natural-sounding than ever before.</div>
                         </div>
