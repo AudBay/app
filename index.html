@@ -1,211 +1,210 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hearing Assessment Report Tool</title>
 
-```
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-```
+    <script src="[https://unpkg.com/react@18/umd/react.development.js](https://unpkg.com/react@18/umd/react.development.js)"></script>
+    <script src="[https://unpkg.com/react-dom@18/umd/react-dom.development.js](https://unpkg.com/react-dom@18/umd/react-dom.development.js)"></script>
+    <script src="[https://unpkg.com/@babel/standalone/babel.min.js](https://unpkg.com/@babel/standalone/babel.min.js)"></script>
 
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, -apple-system, sans-serif; }
+    </style>
 </head>
 <body>
     <div id="root"></div>
+
     <script type="text/babel">
         const { useState } = React;
 
-```
-    const B = {
-      purple:      "#3b1a56",
-      purpleMid:   "#5c2d80",
-      purpleLight: "#f0e9f7",
-      purpleBorder:"#c9a8e0",
-      purpleDeep:  "#260f3a",
-      gold:        "#c9993a",
-      goldBright:  "#e8b84b",
-      goldLight:   "#fdf6e8",
-      goldBorder:  "#e0c878",
-      text:        "#1c1230",
-      muted:       "#6b7280",
-      border:      "#e4dded",
-      bg:          "#f5f0fa",
-      white:       "#ffffff",
-      slate:       "#f8f5fc",
-    };
+        const B = {
+            purple: "#3b1a56",
+            purpleMid: "#5c2d80",
+            purpleLight: "#f0e9f7",
+            purpleBorder: "#c9a8e0",
+            purpleDeep: "#260f3a",
+            gold: "#c9993a",
+            goldBright: "#e8b84b",
+            goldLight: "#fdf6e8",
+            goldBorder: "#e0c878",
+            text: "#1c1230",
+            muted: "#6b7280",
+            border: "#e4dded",
+            bg: "#f5f0fa",
+            white: "#ffffff",
+            slate: "#f8f5fc",
+        };
 
-    const TITLES = ["Mr","Mrs","Ms","Miss","Dr","Prof","Rev"];
-    const LOSS_LEVELS = ["Normal","Mild","Moderate","Severe","Profound"];
-    const LOSS_TYPES  = ["No Loss","Sensorineural","Conductive","Mixed"];
-    const MANUFACTURERS = ["Starkey","Oticon","Widex"];
+        const TITLES = ["Mr", "Mrs", "Ms", "Miss", "Dr", "Prof", "Rev"];
+        const LOSS_LEVELS = ["Normal", "Mild", "Moderate", "Severe", "Profound"];
+        const LOSS_TYPES = ["No Loss", "Sensorineural", "Conductive", "Mixed"];
+        const MANUFACTURERS = ["Starkey", "Oticon", "Widex"];
 
-    const LOSS_COLORS = {
-      Normal:"#1a8a5e", Mild:"#d4900a", Moderate:"#d4620a",
-      Severe:"#b83030", Profound:"#7b1fa2",
-    };
-    const LOSS_BG = {
-      Normal:"#e6f7f1", Mild:"#fff4de", Moderate:"#fff0e6",
-      Severe:"#fdeaea", Profound:"#f5e8ff",
-    };
+        const LOSS_COLORS = {
+            Normal: "#1a8a5e", Mild: "#d4900a", Moderate: "#d4620a",
+            Severe: "#b83030", Profound: "#7b1fa2",
+        };
+        const LOSS_BG = {
+            Normal: "#e6f7f1", Mild: "#fff4de", Moderate: "#fff0e6",
+            Severe: "#fdeaea", Profound: "#f5e8ff",
+        };
 
-    const LOSS_DESCRIPTIONS = {
-      Normal:   "Hearing falls within the normal range. No loss detected.",
-      Mild:     "May struggle to follow conversations in noisy environments.",
-      Moderate: "Understanding speech without a hearing aid is likely difficult.",
-      Severe:   "Hearing conversation unaided is very difficult. Aids strongly advised.",
-      Profound: "Understanding speech without powerful amplification is extremely challenging.",
-    };
+        const LOSS_DESCRIPTIONS = {
+            Normal: "Hearing falls within the normal range. No loss detected.",
+            Mild: "May struggle to follow conversations in noisy environments.",
+            Moderate: "Understanding speech without a hearing aid is likely difficult.",
+            Severe: "Hearing conversation unaided is very difficult. Aids strongly advised.",
+            Profound: "Understanding speech without powerful amplification is extremely challenging.",
+        };
 
-    const MFR = {
-      Starkey: {
-        tagline: "Intelligent hearing technology with a personal touch",
-        known: "Award-winning AI-powered sound processing",
-        highlights: [
-          "Edge Mode+ AI adapts instantly to any environment",
-          "Healthable tech monitors activity & brain health",
-          "Integrated fall detection with loved-one alerts",
-          "Industry-leading rechargeable battery life",
-          "Thrive app for full personalised phone control",
-        ],
-        why: "Ideal for clients who want technology that actively supports overall wellbeing.",
-      },
-      Oticon: {
-        tagline: "BrainHearing technology that works with your brain",
-        known: "Rated among the world's most innovative hearing brands",
-        highlights: [
-          "BrainHearing supports natural sound processing",
-          "360 open soundscape for effortless listening",
-          "Deep Neural Network trained on 12M real sounds",
-          "Discreet designs across a wide range of styles",
-          "Direct streaming for iPhone and Android",
-        ],
-        why: "Outstanding choice for natural hearing that reduces listening fatigue.",
-      },
-      Widex: {
-        tagline: "The purest, most natural sound quality available",
-        known: "Pioneers of ultra-fast sound processing technology",
-        highlights: [
-          "Renowned worldwide for natural sound reproduction",
-          "PureSound eliminates the processed sensation",
-          "Zen therapy with gentle tones to ease tinnitus",
-          "Fastest signal processing — virtually zero delay",
-          "SoundSense Learn AI adapts to your preferences",
-        ],
-        why: "The preferred choice for clients who want hearing aids that feel invisible.",
-      },
-    };
+        const MFR = {
+            Starkey: {
+                tagline: "Intelligent hearing technology with a personal touch",
+                known: "Award-winning AI-powered sound processing",
+                highlights: [
+                    "Edge Mode+ AI adapts instantly to any environment",
+                    "Healthable tech monitors activity & brain health",
+                    "Integrated fall detection with loved-one alerts",
+                    "Industry-leading rechargeable battery life",
+                    "Thrive app for full personalised phone control",
+                ],
+                why: "Ideal for clients who want technology that actively supports overall wellbeing.",
+            },
+            Oticon: {
+                tagline: "BrainHearing technology that works with your brain",
+                known: "Rated among the world's most innovative hearing brands",
+                highlights: [
+                    "BrainHearing supports natural sound processing",
+                    "360 open soundscape for effortless listening",
+                    "Deep Neural Network trained on 12M real sounds",
+                    "Discreet designs across a wide range of styles",
+                    "Direct streaming for iPhone and Android",
+                ],
+                why: "Outstanding choice for natural hearing that reduces listening fatigue.",
+            },
+            Widex: {
+                tagline: "The purest, most natural sound quality available",
+                known: "Pioneers of ultra-fast sound processing technology",
+                highlights: [
+                    "Renowned worldwide for natural sound reproduction",
+                    "PureSound eliminates the processed sensation",
+                    "Zen therapy with gentle tones to ease tinnitus",
+                    "Fastest signal processing — virtually zero delay",
+                    "SoundSense Learn AI adapts to your preferences",
+                ],
+                why: "The preferred choice for clients who want hearing aids that feel invisible.",
+            },
+        };
 
-    const NEXT_STEPS = [
-      { icon: "🎧", title: "Book a Free Trial", desc: "No-obligation hearing aid trial — hear the difference for yourself." },
-      { icon: "💬", title: "Speak to a Specialist", desc: "Our audiologist will guide you through every option for your lifestyle." },
-      { icon: "✨", title: "Connect Member — £150 Off", desc: "Join today and receive £150 off your new hearing aids.", hasDiscount: true },
-      { icon: "🌍", title: "Reconnect with the World", desc: "Better hearing protects cognitive health and enriches daily life." },
-    ];
+        const NEXT_STEPS = [
+            { icon: "🎧", title: "Book a Free Trial", desc: "No-obligation hearing aid trial — hear the difference for yourself." },
+            { icon: "💬", title: "Speak to a Specialist", desc: "Our audiologist will guide you through every option for your lifestyle." },
+            { icon: "✨", title: "Connect Member Offer", desc: "Join today and receive £150 off your new hearing aids.", hasDiscount: true },
+            { icon: "🌍", title: "Reconnect with the World", desc: "Better hearing protects cognitive health and enriches daily life." },
+        ];
 
-    const Field = ({ label, children, span }) => (
-      <div style={{ display:"flex", flexDirection:"column", gap:4, gridColumn:span||"auto" }}>
-        <label style={{ fontSize:10, fontWeight:600, color:B.muted, textTransform:"uppercase", letterSpacing:0.6 }}>{label}</label>
-        {children}
-      </div>
-    );
-    const Input = (props) => (
-      <input {...props} style={{ padding:"8px 11px", border:`1.5px solid ${B.border}`, borderRadius:7,
-        fontSize:13, fontFamily:"inherit", color:B.text, background:B.bg, outline:"none" }} />
-    );
-    const Select = (props) => (
-      <select {...props} style={{ padding:"8px 11px", border:`1.5px solid ${B.border}`, borderRadius:7,
-        fontSize:13, fontFamily:"inherit", color:B.text, background:B.bg, outline:"none", cursor:"pointer" }} />
-    );
-    const FormCard = ({ icon, title, children, optional }) => (
-      <div style={{ background:B.white, borderRadius:12, border:`1px solid ${B.border}`, overflow:"hidden", boxShadow:"0 1px 4px rgba(0,0,0,0.05)" }}>
-        <div style={{ background:B.purple, padding:"10px 18px", display:"flex", alignItems:"center", gap:8 }}>
-          <span>{icon}</span>
-          <span style={{ fontFamily:"Georgia,serif", color:"white", fontSize:14, fontWeight:700 }}>{title}</span>
-          {optional && <span style={{ color:"rgba(255,255,255,0.45)", fontSize:11, marginLeft:4 }}>(optional)</span>}
-        </div>
-        <div style={{ padding:18 }}>{children}</div>
-      </div>
-    );
-
-    const SectionLabel = ({ children }) => (
-      <div style={{ fontSize:8, fontWeight:700, color:B.purpleMid,
-        textTransform:"uppercase", letterSpacing:1.5, marginBottom:5,
-        display:"flex", alignItems:"center", gap:6 }}>
-        <div style={{ flex:1, height:1, background:`linear-gradient(90deg,${B.purpleBorder},transparent)` }} />
-        <span>{children}</span>
-        <div style={{ flex:1, height:1, background:`linear-gradient(90deg,transparent,${B.purpleBorder})` }} />
-      </div>
-    );
-
-    const EarCard = ({ level, type, side, label }) => {
-      const color = LOSS_COLORS[level] || "#999";
-      const bg    = LOSS_BG[level]    || "#f5f5f5";
-      const segments = ["Normal","Mild","Moderate","Severe","Profound"];
-      const segColors = ["#1a8a5e","#d4900a","#d4620a","#b83030","#7b1fa2"];
-      const activeIdx = segments.indexOf(level);
-      return (
-        <div style={{ borderRadius:8, overflow:"hidden", border:`1.5px solid ${color}40`, background:bg, display:"flex", flexDirection:"column" }}>
-          <div style={{ background:color, padding:"4px 10px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-            <span style={{ fontWeight:700, fontSize:8.5, textTransform:"uppercase", letterSpacing:0.8, color:"white" }}>{label}</span>
-            <span style={{ fontSize:7.5, color:"rgba(255,255,255,0.8)", fontWeight:500 }}>{type||"—"}</span>
-          </div>
-          <div style={{ padding:"7px 10px", flex:1 }}>
-            <div style={{ fontFamily:"Georgia,serif", fontSize:15, fontWeight:700, color, marginBottom:5 }}>
-              {level||"—"} Loss
+        const Field = ({ label, children, span }) => (
+            <div style={{ display: "flex", flexDirection: "column", gap: 4, gridColumn: span || "auto" }}>
+                <label style={{ fontSize: 10, fontWeight: 600, color: B.muted, textTransform: "uppercase", letterSpacing: 0.6 }}>{label}</label>
+                {children}
             </div>
-            <div style={{ display:"flex", gap:2, marginBottom:6 }}>
-              {segments.map((s,i)=>(
-                <div key={s} title={s} style={{ flex:1, height:4, borderRadius:2,
-                  background: i < activeIdx ? segColors[i] : i === activeIdx ? color : "#ddd4e8",
-                  opacity: i <= activeIdx ? 1 : 0.3 }} />
-              ))}
+        );
+        const Input = (props) => (
+            <input {...props} style={{ padding: "8px 11px", border: `1.5px solid ${B.border}`, borderRadius: 7, fontSize: 13, fontFamily: "inherit", color: B.text, background: B.bg, outline: "none" }} />
+        );
+        const Select = (props) => (
+            <select {...props} style={{ padding: "8px 11px", border: `1.5px solid ${B.border}`, borderRadius: 7, fontSize: 13, fontFamily: "inherit", color: B.text, background: B.bg, outline: "none", cursor: "pointer" }} />
+        );
+        const FormCard = ({ icon, title, children, optional }) => (
+            <div style={{ background: B.white, borderRadius: 12, border: `1px solid ${B.border}`, overflow: "hidden", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", marginBottom: 16 }}>
+                <div style={{ background: B.purple, padding: "10px 18px", display: "flex", alignItems: "center", gap: 8 }}>
+                    <span>{icon}</span>
+                    <span style={{ fontFamily: "Georgia,serif", color: "white", fontSize: 14, fontWeight: 700 }}>{title}</span>
+                    {optional && <span style={{ color: "rgba(255,255,255,0.45)", fontSize: 11, marginLeft: 4 }}>(optional)</span>}
+                </div>
+                <div style={{ padding: 18 }}>{children}</div>
             </div>
-            <div style={{ fontSize:8.5, color:"#4a3060", lineHeight:1.4 }}>
-              {level ? LOSS_DESCRIPTIONS[level] : ""}
+        );
+
+        const SectionLabel = ({ children }) => (
+            <div style={{ fontSize: 8, fontWeight: 700, color: B.purpleMid, textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 5, display: "flex", alignItems: "center", gap: 6 }}>
+                <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${B.purpleBorder},transparent)` }} />
+                <span>{children}</span>
+                <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,transparent,${B.purpleBorder})` }} />
             </div>
-          </div>
-        </div>
-      );
-    };
+        );
 
-    function App() {
-      const [form, setForm] = useState({
-        title:"Mr", clientName:"", clientId:"",
-        testDate: new Date().toISOString().split("T")[0],
-        audiologistName:"",
-        leftEar:{ level:"", type:"" }, rightEar:{ level:"", type:"" },
-        manufacturer:"", notes:"",
-      });
-      const [tab, setTab]   = useState("form");
-      const [done, setDone] = useState(false);
+        const EarCard = ({ level, type, side, label }) => {
+            const color = LOSS_COLORS[level] || "#999";
+            const bg = LOSS_BG[level] || "#f5f5f5";
+            const segments = ["Normal", "Mild", "Moderate", "Severe", "Profound"];
+            const segColors = ["#1a8a5e", "#d4900a", "#d4620a", "#b83030", "#7b1fa2"];
+            const activeIdx = segments.indexOf(level);
+            return (
+                <div style={{ borderRadius: 8, overflow: "hidden", border: `1.5px solid ${color}40`, background: bg, display: "flex", flexDirection: "column" }}>
+                    <div style={{ background: color, padding: "4px 10px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                        <span style={{ fontWeight: 700, fontSize: 8.5, textTransform: "uppercase", letterSpacing: 0.8, color: "white" }}>{label}</span>
+                        <span style={{ fontSize: 7.5, color: "rgba(255,255,255,0.8)", fontWeight: 500 }}>{type || "—"}</span>
+                    </div>
+                    <div style={{ padding: "7px 10px", flex: 1 }}>
+                        <div style={{ fontFamily: "Georgia,serif", fontSize: 15, fontWeight: 700, color, marginBottom: 5 }}>
+                            {level || "—"} Loss
+                        </div>
+                        <div style={{ display: "flex", gap: 2, marginBottom: 6 }}>
+                            {segments.map((s, i) => (
+                                <div key={s} title={s} style={{
+                                    flex: 1, height: 4, borderRadius: 2,
+                                    background: i < activeIdx ? segColors[i] : i === activeIdx ? color : "#ddd4e8",
+                                    opacity: i <= activeIdx ? 1 : 0.3
+                                }} />
+                            ))}
+                        </div>
+                        <div style={{ fontSize: 8.5, color: "#4a3060", lineHeight: 1.4 }}>
+                            {level ? LOSS_DESCRIPTIONS[level] : ""}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
 
-      const set    = (f,v) => setForm(p=>({...p,[f]:v}));
-      const setEar = (ear,f,v) => setForm(p=>({...p,[ear]:{...p[ear],[f]:v}}));
+        function App() {
+            const [form, setForm] = useState({
+                title: "Mr", clientName: "", clientId: "",
+                testDate: new Date().toISOString().split("T")[0],
+                audiologistName: "",
+                leftEar: { level: "", type: "" }, rightEar: { level: "", type: "" },
+                manufacturer: "", notes: "",
+            });
+            const [tab, setTab] = useState("form");
+            const [done, setDone] = useState(false);
 
-      const valid = form.clientName && form.testDate && form.audiologistName &&
-        form.leftEar.level && form.leftEar.type &&
-        form.rightEar.level && form.rightEar.type && form.manufacturer;
+            const set = (f, v) => setForm(p => ({ ...p, [f]: v }));
+            const setEar = (ear, f, v) => setForm(p => ({ ...p, [ear]: { ...p[ear], [f]: v } }));
 
-      const mfr     = MFR[form.manufacturer] || null;
-      const dateStr = form.testDate
-        ? new Date(form.testDate+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})
-        : "";
+            const valid = form.clientName && form.testDate && form.audiologistName &&
+                form.leftEar.level && form.leftEar.type &&
+                form.rightEar.level && form.rightEar.type && form.manufacturer;
 
-      const hasLeftLoss  = form.leftEar.level  && form.leftEar.level  !== "Normal";
-      const hasRightLoss = form.rightEar.level && form.rightEar.level !== "Normal";
-      const totalEars    = (hasLeftLoss?1:0)+(hasRightLoss?1:0);
-      const recommendationText = totalEars === 2
-        ? "Hearing aids are recommended for both ears based on your assessment."
-        : totalEars === 1
-        ? `A hearing aid is recommended for your ${hasLeftLoss?"left":"right"} ear.`
-        : "No hearing aids are recommended at this time.";
+            const mfr = MFR[form.manufacturer] || null;
+            const dateStr = form.testDate
+                ? new Date(form.testDate + "T12:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
+                : "";
 
-      return (
-        <>
-          <style>{`
+            const hasLeftLoss = form.leftEar.level && form.leftEar.level !== "Normal";
+            const hasRightLoss = form.rightEar.level && form.rightEar.level !== "Normal";
+            const totalEars = (hasLeftLoss ? 1 : 0) + (hasRightLoss ? 1 : 0);
+            const recommendationText = totalEars === 2
+                ? "Hearing aids are recommended for both ears based on your assessment."
+                : totalEars === 1
+                    ? `A hearing aid is recommended for your ${hasLeftLoss ? "left" : "right"} ear.`
+                    : "No hearing aids are recommended at this time.";
+
+            return (
+                <>
+                    <style>{`
             @media print {
               @page { size:A4 portrait; margin:0; }
               body { margin:0; background:white; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
@@ -218,286 +217,218 @@
               }
               .preview-shell { padding:0 !important; background:white !important; }
             }
-            *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-            body { font-family:system-ui,sans-serif; background:${B.bg}; color:${B.text}; }
-            .seg-btn { padding:5px 10px; border-radius:14px; font-size:11px; font-weight:500; border:1.5px solid ${B.border}; background:white; color:${B.muted}; cursor:pointer; transition:all 0.15s; font-family:system-ui,sans-serif; }
+            .seg-btn { padding:5px 10px; border-radius:14px; font-size:11px; font-weight:500; border:1.5px solid ${B.border}; background:white; color:${B.muted}; cursor:pointer; transition:all 0.15s; }
             .seg-btn.sl { color:white; border-color:transparent; }
             .seg-btn.st { background:${B.purpleLight}; border-color:${B.purpleMid}; color:${B.purpleMid}; font-weight:600; }
-            .mfr-btn { padding:13px 10px; border-radius:9px; border:2px solid ${B.border}; background:white; cursor:pointer; text-align:center; width:100%; font-family:system-ui,sans-serif; }
+            .mfr-btn { padding:13px 10px; border-radius:9px; border:2px solid ${B.border}; background:white; cursor:pointer; text-align:center; width:100%; }
             .mfr-btn.sm { border-color:${B.purple}; background:${B.purpleLight}; }
-            .gen-btn { width:100%; padding:13px; background:${B.purple}; color:white; border:none; border-radius:9px; font-size:14px; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(59,26,86,0.3); font-family:system-ui,sans-serif; }
+            .gen-btn { width:100%; padding:13px; background:${B.purple}; color:white; border:none; border-radius:9px; font-size:14px; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(59,26,86,0.3); }
             .gen-btn:disabled { background:#ccc; box-shadow:none; cursor:not-allowed; }
           `}</style>
 
-          <div style={{ minHeight:"100vh" }}>
-            <div className="no-print" style={{ background:B.purple, padding:"14px 24px", display:"flex", alignItems:"center", gap:14 }}>
-              <div style={{ width:38, height:38, background:B.purpleMid, borderRadius:9, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>🦻</div>
-              <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:18, fontWeight:700 }}>Hearing Assessment Report</div>
-            </div>
+                    <div style={{ minHeight: "100vh", background: B.bg }}>
+                        <div className="no-print" style={{ background: B.purple, padding: "14px 24px", display: "flex", alignItems: "center", gap: 14 }}>
+                            <div style={{ width: 38, height: 38, background: B.purpleMid, borderRadius: 9, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>🦻</div>
+                            <div style={{ fontFamily: "Georgia,serif", color: "white", fontSize: 18, fontWeight: 700 }}>Hearing Assessment Report</div>
+                        </div>
 
-            <div className="no-print" style={{ background:"white", borderBottom:`1px solid ${B.border}`, display:"flex", padding:"0 24px" }}>
-              {["form", done&&"preview"].filter(Boolean).map(t=>(
-                <button key={t} onClick={()=>setTab(t)} style={{ padding:"11px 16px", fontSize:12, fontWeight:600, background:"none", border:"none", borderBottom:tab===t?`2px solid ${B.purple}`:"2px solid transparent", color:tab===t?B.purple:B.muted, cursor:"pointer", fontFamily:"system-ui,sans-serif" }}>
-                  {t==="form"?"📋 Assessment Form":"📄 PDF Preview"}
-                </button>
-              ))}
-            </div>
+                        <div className="no-print" style={{ background: "white", borderBottom: `1px solid ${B.border}`, display: "flex", padding: "0 24px" }}>
+                            {["form", done && "preview"].filter(Boolean).map(t => (
+                                <button key={t} onClick={() => setTab(t)} style={{ padding: "11px 16px", fontSize: 12, fontWeight: 600, background: "none", border: "none", borderBottom: tab === t ? `2px solid ${B.purple}` : "2px solid transparent", color: tab === t ? B.purple : B.muted, cursor: "pointer" }}>
+                                    {t === "form" ? "📋 Assessment Form" : "📄 PDF Preview"}
+                                </button>
+                            ))}
+                        </div>
 
-            {tab==="form" && (
-              <div style={{ maxWidth:700, margin:"0 auto", padding:"24px 18px", display:"flex", flexDirection:"column", gap:16 }}>
-                <FormCard icon="👤" title="Client & Clinic Details">
-                  <div style={{ display:"grid", gridTemplateColumns:"100px 1fr", gap:12 }}>
-                    <Field label="Title"><Select value={form.title} onChange={e=>set("title",e.target.value)}>{TITLES.map(t=><option key={t}>{t}</option>)}</Select></Field>
-                    <Field label="Client Full Name *"><Input placeholder="e.g. Margaret Collins" value={form.clientName} onChange={e=>set("clientName",e.target.value)} /></Field>
-                    <div style={{ gridColumn:"1/-1", display:"grid", gridTemplateColumns:"1fr 1fr", gap:12 }}>
-                      <Field label="Client ID"><Input placeholder="e.g. BAY-00123" value={form.clientId} onChange={e=>set("clientId",e.target.value)} /></Field>
-                      <Field label="Test Date *"><Input type="date" value={form.testDate} onChange={e=>set("testDate",e.target.value)} /></Field>
-                    </div>
-                    <Field label="Audiologist Name *" span="1/-1"><Input placeholder="e.g. Dr. Sarah O'Brien" value={form.audiologistName} onChange={e=>set("audiologistName",e.target.value)} /></Field>
-                  </div>
-                </FormCard>
+                        {tab === "form" && (
+                            <div style={{ maxWidth: 700, margin: "0 auto", padding: "24px 18px" }}>
+                                <FormCard icon="👤" title="Client & Clinic Details">
+                                    <div style={{ display: "grid", gridTemplateColumns: "100px 1fr", gap: 12 }}>
+                                        <Field label="Title"><Select value={form.title} onChange={e => set("title", e.target.value)}>{TITLES.map(t => <option key={t}>{t}</option>)}</Select></Field>
+                                        <Field label="Client Full Name *"><Input placeholder="e.g. Margaret Collins" value={form.clientName} onChange={e => set("clientName", e.target.value)} /></Field>
+                                        <div style={{ gridColumn: "1/-1", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                                            <Field label="Client ID"><Input placeholder="e.g. BAY-00123" value={form.clientId} onChange={e => set("clientId", e.target.value)} /></Field>
+                                            <Field label="Test Date *"><Input type="date" value={form.testDate} onChange={e => set("testDate", e.target.value)} /></Field>
+                                        </div>
+                                        <Field label="Audiologist Name *" span="1/-1"><Input placeholder="e.g. Dr. Sarah O'Brien" value={form.audiologistName} onChange={e => set("audiologistName", e.target.value)} /></Field>
+                                    </div>
+                                </FormCard>
 
-                <FormCard icon="📊" title="Hearing Test Results">
-                  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
-                    {[["leftEar","left","Left Ear"],["rightEar","right","Right Ear"]].map(([key,side,label])=>(
-                      <div key={key} style={{ border:`1.5px solid ${B.border}`, borderRadius:9, overflow:"hidden" }}>
-                        <div style={{ padding:"8px 12px", fontWeight:700, fontSize:11, background:side==="left"?"#e8f0fb":"#fdeee3", color:side==="left"?"#1565c0":"#b85c1a" }}>{label}</div>
-                        <div style={{ padding:12, display:"flex", flexDirection:"column", gap:10 }}>
-                          <div>
-                            <div style={{ fontSize:9, fontWeight:700, color:B.muted, textTransform:"uppercase", letterSpacing:0.5, marginBottom:5 }}>Degree of Loss *</div>
-                            <div style={{ display:"flex", flexWrap:"wrap", gap:4 }}>
-                              {LOSS_LEVELS.map(l=>(
-                                <button key={l} className={`seg-btn ${form[key].level===l?"sl":""}`} style={form[key].level===l?{backgroundColor:LOSS_COLORS[l]}:{}} onClick={()=>setEar(key,"level",l)}>{l}</button>
-                              ))}
+                                <FormCard icon="📊" title="Hearing Test Results">
+                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                                        {[["leftEar", "left", "Left Ear"], ["rightEar", "right", "Right Ear"]].map(([key, side, label]) => (
+                                            <div key={key} style={{ border: `1.5px solid ${B.border}`, borderRadius: 9, overflow: "hidden" }}>
+                                                <div style={{ padding: "8px 12px", fontWeight: 700, fontSize: 11, background: side === "left" ? "#e8f0fb" : "#fdeee3", color: side === "left" ? "#1565c0" : "#b85c1a" }}>{label}</div>
+                                                <div style={{ padding: 12, display: "flex", flexDirection: "column", gap: 10 }}>
+                                                    <div>
+                                                        <div style={{ fontSize: 9, fontWeight: 700, color: B.muted, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 5 }}>Degree of Loss *</div>
+                                                        <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                                                            {LOSS_LEVELS.map(l => (
+                                                                <button key={l} className={`seg-btn ${form[key].level === l ? "sl" : ""}`} style={form[key].level === l ? { backgroundColor: LOSS_COLORS[l] } : {}} onClick={() => setEar(key, "level", l)}>{l}</button>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontSize: 9, fontWeight: 700, color: B.muted, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 5 }}>Type of Loss *</div>
+                                                        <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                                                            {LOSS_TYPES.map(t => (
+                                                                <button key={t} className={`seg-btn ${form[key].type === t ? "st" : ""}`} onClick={() => setEar(key, "type", t)}>{t}</button>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </FormCard>
+
+                                <FormCard icon="🎧" title="Recommended Manufacturer *">
+                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+                                        {MANUFACTURERS.map(m => (
+                                            <button key={m} className={`mfr-btn ${form.manufacturer === m ? "sm" : ""}`} onClick={() => set("manufacturer", m)}>
+                                                <div style={{ fontWeight: 700, fontSize: 13, color: form.manufacturer === m ? B.purple : B.text }}>{m}</div>
+                                                <div style={{ fontSize: 10, color: B.muted, marginTop: 2 }}>{MFR[m].known}</div>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </FormCard>
+
+                                <FormCard icon="📝" title="Audiologist Notes" optional>
+                                    <textarea placeholder="e.g. Client reports difficulty in noisy environments." value={form.notes} onChange={e => set("notes", e.target.value)}
+                                        style={{ width: "100%", minHeight: 64, padding: "8px 11px", border: `1.5px solid ${B.border}`, borderRadius: 7, fontSize: 12, fontFamily: "inherit", color: B.text, background: B.bg, resize: "vertical" }} />
+                                </FormCard>
+
+                                <button className="gen-btn" disabled={!valid} onClick={() => { setDone(true); setTab("preview"); }}>📄 Generate PDF Report</button>
                             </div>
-                          </div>
-                          <div>
-                            <div style={{ fontSize:9, fontWeight:700, color:B.muted, textTransform:"uppercase", letterSpacing:0.5, marginBottom:5 }}>Type of Loss *</div>
-                            <div style={{ display:"flex", flexWrap:"wrap", gap:4 }}>
-                              {LOSS_TYPES.map(t=>(
-                                <button key={t} className={`seg-btn ${form[key].type===t?"st":""}`} onClick={()=>setEar(key,"type",t)}>{t}</button>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </FormCard>
-
-                <FormCard icon="🎧" title="Recommended Manufacturer *">
-                  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:10 }}>
-                    {MANUFACTURERS.map(m=>(
-                      <button key={m} className={`mfr-btn ${form.manufacturer===m?"sm":""}`} onClick={()=>set("manufacturer",m)}>
-                        <div style={{ fontWeight:700, fontSize:13, color:form.manufacturer===m?B.purple:B.text }}>{m}</div>
-                        <div style={{ fontSize:10, color:B.muted, marginTop:2 }}>{MFR[m].known}</div>
-                      </button>
-                    ))}
-                  </div>
-                </FormCard>
-
-                <FormCard icon="📝" title="Audiologist Notes" optional>
-                  <textarea placeholder="e.g. Client reports difficulty in noisy environments." value={form.notes} onChange={e=>set("notes",e.target.value)}
-                    style={{ width:"100%", minHeight:64, padding:"8px 11px", border:`1.5px solid ${B.border}`, borderRadius:7, fontSize:12, fontFamily:"inherit", color:B.text, background:B.bg, resize:"vertical" }} />
-                </FormCard>
-
-                <button className="gen-btn" disabled={!valid} onClick={()=>{ setDone(true); setTab("preview"); }}>📄 Generate PDF Report</button>
-              </div>
-            )}
-
-            {tab==="preview" && done && (
-              <div className="preview-shell" style={{ padding:"20px 16px", display:"flex", flexDirection:"column", alignItems:"center", gap:16, background:"#c0aed4" }}>
-
-                <div className="no-print" style={{ display:"flex", gap:10 }}>
-                  <button onClick={()=>window.print()} style={{ background:B.purple, color:"white", border:"none", borderRadius:7, padding:"9px 20px", fontSize:13, fontWeight:700, cursor:"pointer", fontFamily:"system-ui,sans-serif" }}>🖨️ Print / Save as PDF</button>
-                  <button onClick={()=>setTab("form")} style={{ background:"white", color:B.purple, border:`1px solid ${B.purpleBorder}`, borderRadius:7, padding:"9px 16px", fontSize:12, cursor:"pointer", fontFamily:"system-ui,sans-serif" }}>← Edit Form</button>
-                </div>
-
-                {/* ══ A4 PAGE ══ */}
-                <div className="pdf-page" style={{
-                  background:"white", display:"flex", flexDirection:"column",
-                  width:"210mm", minHeight:"297mm",
-                  boxShadow:"0 8px 40px rgba(0,0,0,0.3)", fontFamily:"system-ui,sans-serif"
-                }}>
-
-                  {/* HEADER */}
-                  <div style={{ background:`linear-gradient(130deg,${B.purpleDeep} 0%,${B.purple} 55%,${B.purpleMid} 100%)`, padding:"16px 24px 14px", flexShrink:0, position:"relative", overflow:"hidden" }}>
-                    {/* Decorative orbs */}
-                    <div style={{ position:"absolute", top:-40, right:-20, width:140, height:140, borderRadius:"50%", background:"rgba(255,255,255,0.04)" }} />
-                    <div style={{ position:"absolute", top:5, right:60, width:70, height:70, borderRadius:"50%", background:"rgba(255,255,255,0.05)" }} />
-                    <div style={{ position:"absolute", bottom:-30, left:20, width:90, height:90, borderRadius:"50%", background:"rgba(255,255,255,0.03)" }} />
-
-                    {/* Top row */}
-                    <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", position:"relative", marginBottom:10 }}>
-                      <div>
-                        <div style={{ color:"rgba(255,255,255,0.5)", fontSize:7.5, textTransform:"uppercase", letterSpacing:2, marginBottom:3 }}>Personalised · Confidential · Professional</div>
-                        <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:21, fontWeight:700, letterSpacing:"-0.3px" }}>
-                          Hearing Assessment Report
-                        </div>
-                      </div>
-                      <div style={{ background:"rgba(255,255,255,0.1)", border:"1px solid rgba(255,255,255,0.18)", borderRadius:8, padding:"6px 12px", textAlign:"center", flexShrink:0 }}>
-                        <div style={{ color:"rgba(255,255,255,0.55)", fontSize:7, textTransform:"uppercase", letterSpacing:1, marginBottom:1 }}>Client ID</div>
-                        <div style={{ color:"white", fontSize:11, fontWeight:600, fontFamily:"system-ui,sans-serif" }}>{form.clientId || "—"}</div>
-                      </div>
-                    </div>
-
-                    {/* Gold hairline */}
-                    <div style={{ height:1, background:`linear-gradient(90deg,transparent,${B.goldBright}80,${B.goldBright},${B.goldBright}80,transparent)`, marginBottom:10 }} />
-
-                    {/* Bottom row */}
-                    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", position:"relative" }}>
-                      <div>
-                        <div style={{ color:"rgba(255,255,255,0.5)", fontSize:7.5, textTransform:"uppercase", letterSpacing:1.2, marginBottom:2 }}>Prepared for</div>
-                        <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:17, fontWeight:700 }}>{form.title} {form.clientName}</div>
-                      </div>
-                      <div style={{ display:"flex", gap:20 }}>
-                        {[["Date", dateStr], ["Audiologist", form.audiologistName]].map(([k,v])=>(
-                          <div key={k} style={{ textAlign:"right" }}>
-                            <div style={{ color:"rgba(255,255,255,0.5)", fontSize:7.5, textTransform:"uppercase", letterSpacing:1, marginBottom:1 }}>{k}</div>
-                            <div style={{ color:"white", fontSize:10, fontWeight:500 }}>{v}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Gold accent bar */}
-                  <div style={{ height:3, background:`linear-gradient(90deg,${B.gold},${B.goldBright},${B.goldBright},${B.gold})`, flexShrink:0 }} />
-
-                  {/* BODY */}
-                  <div style={{ padding:"14px 20px 14px", flex:1, display:"flex", flexDirection:"column", gap:12 }}>
-
-                    {/* ROW 1 */}
-                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, flex:"1 1 auto" }}>
-
-                      {/* Ear results */}
-                      <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
-                        <SectionLabel>Your Hearing Test Results</SectionLabel>
-                        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:6, flex:1 }}>
-                          <EarCard level={form.leftEar.level} type={form.leftEar.type} side="left" label="Left Ear" />
-                          <EarCard level={form.rightEar.level} type={form.rightEar.type} side="right" label="Right Ear" />
-                        </div>
-                        <div style={{ background:"linear-gradient(135deg,#fffbee,#fff8e0)", border:`1px solid ${B.goldBorder}`, borderLeft:`3px solid ${B.gold}`, borderRadius:6, padding:"6px 10px", fontSize:9.5, color:"#4a3000", lineHeight:1.5 }}>
-                          <strong>Summary:</strong> {recommendationText}
-                        </div>
-                        {form.notes && (
-                          <div style={{ background:B.slate, border:`1px solid ${B.border}`, borderLeft:`3px solid ${B.purpleMid}`, borderRadius:6, padding:"6px 10px" }}>
-                            <div style={{ fontSize:7.5, fontWeight:700, color:B.purpleMid, textTransform:"uppercase", letterSpacing:1, marginBottom:2 }}>Audiologist Notes</div>
-                            <div style={{ fontSize:9.5, color:"#2d3748", lineHeight:1.4 }}>{form.notes}</div>
-                          </div>
                         )}
-                      </div>
 
-                      {/* Understanding */}
-                      <div style={{ display:"flex", flexDirection:"column" }}>
-                        <SectionLabel>Understanding Your Hearing Loss</SectionLabel>
-                        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:5, flex:1 }}>
-                          {[
-                            ["🔬","What causes it?","Most hearing loss is sensorineural — gradual changes to the hair cells in the inner ear."],
-                            ["📈","Can it worsen?","Untreated hearing loss can worsen over time. Acting early gives the best outcomes."],
-                            ["🔊","How aids help","Modern aids amplify and clarify sound, making everyday conversation feel effortless."],
-                            ["🧠","The cognitive link","Treating hearing loss helps reduce risk of cognitive decline and social isolation."]
-                          ].map(([icon,title,body])=>(
-                            <div key={title} style={{ background:`linear-gradient(145deg,${B.purpleLight},#ede4f5)`, borderRadius:7, padding:"8px 9px", border:`1px solid ${B.purpleBorder}`, display:"flex", flexDirection:"column" }}>
-                              <div style={{ fontSize:14, marginBottom:3 }}>{icon}</div>
-                              <div style={{ fontWeight:700, fontSize:9.5, color:B.purple, marginBottom:2 }}>{title}</div>
-                              <div style={{ fontSize:9, color:"#4a3060", lineHeight:1.4 }}>{body}</div>
+                        {tab === "preview" && done && (
+                            <div className="preview-shell" style={{ padding: "20px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, background: "#c0aed4" }}>
+                                <div className="no-print" style={{ display: "flex", gap: 10 }}>
+                                    <button onClick={() => window.print()} style={{ background: B.purple, color: "white", border: "none", borderRadius: 7, padding: "9px 20px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>🖨️ Print / Save as PDF</button>
+                                    <button onClick={() => setTab("form")} style={{ background: "white", color: B.purple, border: `1px solid ${B.purpleBorder}`, borderRadius: 7, padding: "9px 16px", fontSize: 12, cursor: "pointer" }}>← Edit Form</button>
+                                </div>
+
+                                <div className="pdf-page" style={{ background: "white", display: "flex", flexDirection: "column", width: "210mm", minHeight: "297mm", boxShadow: "0 8px 40px rgba(0,0,0,0.3)", fontFamily: "system-ui, sans-serif" }}>
+                                    
+                                    {/* HEADER */}
+                                    <div style={{ background: `linear-gradient(130deg,${B.purpleDeep} 0%,${B.purple} 55%,${B.purpleMid} 100%)`, padding: "16px 24px 14px", position: "relative", overflow: "hidden" }}>
+                                        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", position: "relative", marginBottom: 10 }}>
+                                            <div>
+                                                <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 7.5, textTransform: "uppercase", letterSpacing: 2, marginBottom: 3 }}>Personalised · Confidential · Professional</div>
+                                                <div style={{ fontFamily: "Georgia,serif", color: "white", fontSize: 21, fontWeight: 700 }}>Hearing Assessment Report</div>
+                                            </div>
+                                            <div style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.18)", borderRadius: 8, padding: "6px 12px", textAlign: "center" }}>
+                                                <div style={{ color: "rgba(255,255,255,0.55)", fontSize: 7, textTransform: "uppercase", letterSpacing: 1 }}>Client ID</div>
+                                                <div style={{ color: "white", fontSize: 11, fontWeight: 600 }}>{form.clientId || "—"}</div>
+                                            </div>
+                                        </div>
+                                        <div style={{ height: 1, background: `linear-gradient(90deg,transparent,${B.goldBright}80,${B.goldBright},${B.goldBright}80,transparent)`, marginBottom: 10 }} />
+                                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                            <div>
+                                                <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 7.5, textTransform: "uppercase", letterSpacing: 1.2 }}>Prepared for</div>
+                                                <div style={{ fontFamily: "Georgia,serif", color: "white", fontSize: 17, fontWeight: 700 }}>{form.title} {form.clientName}</div>
+                                            </div>
+                                            <div style={{ display: "flex", gap: 20 }}>
+                                                <div style={{ textAlign: "right" }}>
+                                                    <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 7.5, textTransform: "uppercase" }}>Date</div>
+                                                    <div style={{ color: "white", fontSize: 10, fontWeight: 500 }}>{dateStr}</div>
+                                                </div>
+                                                <div style={{ textAlign: "right" }}>
+                                                    <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 7.5, textTransform: "uppercase" }}>Audiologist</div>
+                                                    <div style={{ color: "white", fontSize: 10, fontWeight: 500 }}>{form.audiologistName}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* BODY */}
+                                    <div style={{ padding: "14px 20px", flex: 1, display: "flex", flexDirection: "column", gap: 12 }}>
+                                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                                            <div>
+                                                <SectionLabel>Your Hearing Test Results</SectionLabel>
+                                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 8 }}>
+                                                    <EarCard level={form.leftEar.level} type={form.leftEar.type} side="left" label="Left Ear" />
+                                                    <EarCard level={form.rightEar.level} type={form.rightEar.type} side="right" label="Right Ear" />
+                                                </div>
+                                                <div style={{ background: "#fffbee", border: `1px solid ${B.goldBorder}`, borderLeft: `3px solid ${B.gold}`, borderRadius: 6, padding: "6px 10px", fontSize: 9.5 }}>
+                                                    <strong>Summary:</strong> {recommendationText}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <SectionLabel>Understanding Your Hearing Loss</SectionLabel>
+                                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5 }}>
+                                                    {[
+                                                        ["🔬", "What causes it?", "Most hearing loss is sensorineural — gradual inner ear changes."],
+                                                        ["📈", "Can it worsen?", "Untreated loss can worsen. Acting early gives best outcomes."],
+                                                        ["🔊", "How aids help", "Modern aids clarify sound, making conversation effortless."],
+                                                        ["🧠", "Cognitive link", "Treating loss helps reduce risk of cognitive decline."]
+                                                    ].map(([icon, title, body]) => (
+                                                        <div key={title} style={{ background: B.purpleLight, borderRadius: 7, padding: "8px 9px", border: `1px solid ${B.purpleBorder}` }}>
+                                                            <div style={{ fontSize: 14 }}>{icon}</div>
+                                                            <div style={{ fontWeight: 700, fontSize: 9.5, color: B.purple }}>{title}</div>
+                                                            <div style={{ fontSize: 9, lineHeight: 1.4 }}>{body}</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {mfr && (
+                                            <div>
+                                                <SectionLabel>Recommended Solution</SectionLabel>
+                                                <div style={{ borderRadius: 9, border: `1.5px solid ${B.goldBorder}`, background: B.goldLight }}>
+                                                    <div style={{ background: B.gold, padding: "8px 13px", display: "flex", justifyContent: "space-between", color: "white" }}>
+                                                        <div>
+                                                            <div style={{ fontWeight: 700, fontSize: 15 }}>{form.manufacturer}</div>
+                                                            <div style={{ fontSize: 8.5 }}>{mfr.tagline}</div>
+                                                        </div>
+                                                        <div style={{ background: "rgba(255,255,255,0.2)", borderRadius: 5, padding: "3px 8px", fontSize: 8.5 }}>{totalEars} Aid(s)</div>
+                                                    </div>
+                                                    <div style={{ padding: 13 }}>
+                                                        <div style={{ fontSize: 9.5, fontStyle: "italic", marginBottom: 7 }}>{mfr.why}</div>
+                                                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5 }}>
+                                                            {mfr.highlights.map((h, i) => (
+                                                                <div key={i} style={{ fontSize: 9, display: "flex", gap: 5 }}>• {h}</div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        <div>
+                                            <SectionLabel>Your Next Steps</SectionLabel>
+                                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 5 }}>
+                                                {NEXT_STEPS.map((s, i) => (
+                                                    <div key={i} style={{ background: B.purpleLight, borderRadius: 7, padding: "8px 9px", border: `1px solid ${B.purpleBorder}` }}>
+                                                        <div style={{ fontSize: 16 }}>{s.icon}</div>
+                                                        <div style={{ fontWeight: 700, fontSize: 9.5, color: B.purple }}>{s.title}</div>
+                                                        <div style={{ fontSize: 9 }}>{s.desc}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {/* FOOTER */}
+                                    <div style={{ background: B.purpleDeep, padding: 15, color: "white", display: "flex", justifyContent: "space-between" }}>
+                                        <div>
+                                            <div style={{ fontWeight: 700, fontSize: 12 }}>You are not alone.</div>
+                                            <div style={{ fontSize: 9, opacity: 0.7 }}>Modern technology is smaller and smarter than ever.</div>
+                                        </div>
+                                        <div style={{ textAlign: "right", fontSize: 8, opacity: 0.5 }}>Confidential Assessment Report</div>
+                                    </div>
+                                </div>
                             </div>
-                          ))}
-                        </div>
-                      </div>
+                        )}
                     </div>
+                </>
+            );
+        }
 
-                    {/* Divider */}
-                    <div style={{ height:1, background:`linear-gradient(90deg,transparent,${B.purpleBorder}80,${B.purpleBorder},${B.purpleBorder}80,transparent)`, flexShrink:0 }} />
-
-                    {/* ROW 2 */}
-                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, flex:"1 1 auto" }}>
-
-                      {/* Brand */}
-                      {mfr && (
-                        <div style={{ display:"flex", flexDirection:"column" }}>
-                          <SectionLabel>Your Recommended Brand</SectionLabel>
-                          <div style={{ flex:1, borderRadius:9, overflow:"hidden", border:`1.5px solid ${B.goldBorder}`, background:`linear-gradient(160deg,${B.goldLight},#fffef9)`, display:"flex", flexDirection:"column" }}>
-                            <div style={{ background:`linear-gradient(100deg,#9a6e18,${B.gold},#c4962e)`, padding:"8px 13px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-                              <div>
-                                <div style={{ fontFamily:"Georgia,serif", fontSize:15, fontWeight:700, color:"white" }}>{form.manufacturer}</div>
-                                <div style={{ fontSize:8.5, color:"rgba(255,255,255,0.82)" }}>{mfr.tagline}</div>
-                              </div>
-                              <div style={{ background:"rgba(255,255,255,0.22)", borderRadius:5, padding:"3px 8px", fontSize:8.5, color:"white", fontWeight:700, whiteSpace:"nowrap", border:"1px solid rgba(255,255,255,0.3)" }}>
-                                {totalEars === 1 ? "1 Aid" : "2 Aids"}
-                              </div>
-                            </div>
-                            <div style={{ padding:"8px 13px", flex:1 }}>
-                              <div style={{ fontSize:9.5, color:"#5a3800", lineHeight:1.45, fontStyle:"italic", marginBottom:7, paddingBottom:7, borderBottom:`1px solid ${B.goldBorder}` }}>{mfr.why}</div>
-                              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"5px 10px" }}>
-                                {mfr.highlights.map((h,i)=>(
-                                  <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:5 }}>
-                                    <div style={{ width:4, height:4, borderRadius:"50%", background:B.gold, marginTop:4, flexShrink:0 }} />
-                                    <span style={{ fontSize:9, color:"#3a2800", lineHeight:1.35 }}>{h}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Next Steps */}
-                      <div style={{ display:"flex", flexDirection:"column" }}>
-                        <SectionLabel>Your Next Steps</SectionLabel>
-                        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:5, flex:1 }}>
-                          <div style={{ background:`linear-gradient(145deg,${B.purpleLight},#ede4f5)`, borderRadius:7, padding:"8px 9px", border:`1px solid ${B.purpleBorder}`, display:"flex", flexDirection:"column" }}>
-                            <div style={{ fontSize:16, marginBottom:3 }}>🎧</div>
-                            <div style={{ fontWeight:700, fontSize:9.5, color:B.purple, marginBottom:2, lineHeight:1.2 }}>Book a Free Trial</div>
-                            <div style={{ fontSize:9, color:"#4a3060", lineHeight:1.4 }}>No-obligation hearing aid trial — hear the difference for yourself.</div>
-                          </div>
-                          <div style={{ background:`linear-gradient(145deg,${B.purpleLight},#ede4f5)`, borderRadius:7, padding:"8px 9px", border:`1px solid ${B.purpleBorder}`, display:"flex", flexDirection:"column" }}>
-                            <div style={{ fontSize:16, marginBottom:3 }}>💬</div>
-                            <div style={{ fontWeight:700, fontSize:9.5, color:B.purple, marginBottom:2, lineHeight:1.2 }}>Speak to a Specialist</div>
-                            <div style={{ fontSize:9, color:"#4a3060", lineHeight:1.4 }}>Our audiologist will guide you through every option for your lifestyle.</div>
-                          </div>
-                          <div style={{ background:`linear-gradient(145deg,${B.purpleLight},#ede4f5)`, borderRadius:7, padding:"8px 9px", border:`1px solid ${B.purpleBorder}`, display:"flex", flexDirection:"column" }}>
-                            <div style={{ fontSize:16, marginBottom:3 }}>✨</div>
-                            <div style={{ fontWeight:700, fontSize:9.5, color:B.purple, marginBottom:2, lineHeight:1.2 }}>Connect Member Offer</div>
-                            <div style={{ fontSize:9, color:"#4a3060", lineHeight:1.4 }}>Join today and receive <strong style={{ color:B.purpleMid }}>£150 off</strong> your new hearing aids.</div>
-                          </div>
-                          <div style={{ background:`linear-gradient(145deg,${B.purpleLight},#ede4f5)`, borderRadius:7, padding:"8px 9px", border:`1px solid ${B.purpleBorder}`, display:"flex", flexDirection:"column" }}>
-                            <div style={{ fontSize:16, marginBottom:3 }}>🌍</div>
-                            <div style={{ fontWeight:700, fontSize:9.5, color:B.purple, marginBottom:2, lineHeight:1.2 }}>Reconnect with the World</div>
-                            <div style={{ fontSize:9, color:"#4a3060", lineHeight:1.4 }}>Better hearing protects cognitive health and enriches daily life.</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* FOOTER */}
-                    <div style={{ flexShrink:0, background:`linear-gradient(130deg,${B.purpleDeep},${B.purple})`, borderRadius:8, padding:"10px 18px", display:"flex", alignItems:"center", justifyContent:"space-between", position:"relative", overflow:"hidden" }}>
-                      <div style={{ position:"absolute", right:-15, top:-25, width:90, height:90, borderRadius:"50%", background:"rgba(255,255,255,0.04)" }} />
-                      <div style={{ position:"absolute", right:40, bottom:-30, width:60, height:60, borderRadius:"50%", background:"rgba(255,255,255,0.03)" }} />
-                      <div style={{ position:"relative" }}>
-                        <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:13, fontWeight:700, marginBottom:1 }}>You are not alone.</div>
-                        <div style={{ color:"rgba(255,255,255,0.6)", fontSize:9.5 }}>Modern hearing technology is smaller, smarter and more natural-sounding than ever before.</div>
-                      </div>
-                      <div style={{ textAlign:"right", flexShrink:0, position:"relative" }}>
-                        <div style={{ color:"rgba(255,255,255,0.35)", fontSize:8 }}>Hearing Assessment Report</div>
-                        <div style={{ color:"rgba(255,255,255,0.2)", fontSize:7.5 }}>Confidential · {dateStr}</div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </>
-      );
-    }
-
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<App />);
-</script>
-```
-
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<App />);
+    </script>
 </body>
 </html>
