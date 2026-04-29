@@ -335,10 +335,10 @@
                   <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr} audiologistName={form.audiologistName} clientId={form.clientId} />
                   <GoldBar />
 
-                  <div style={{ padding:"12px 18px", display:"flex", flexDirection:"column", gap:9 }}>
+                  <div style={{ padding:"12px 18px", flex:1, display:"flex", flexDirection:"column", justifyContent:"space-between" }}>
 
                     {/* ROW 1: Ear Results + Understanding */}
-                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:9 }}>
+                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:9, flex:"1 1 auto" }}>
                       {/* Left column: ear cards + summary */}
                       <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
                         <SectionTitle>Your Hearing Test Results</SectionTitle>
@@ -379,12 +379,12 @@
                     </div>
 
                     {/* ROW 2: Recommended Brand + Next Steps side by side */}
-                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:9 }}>
+                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:9, flex:"1 1 auto" }}>
                       {/* Recommended brand */}
                       {mfr && (
-                        <div>
+                        <div style={{ display:"flex", flexDirection:"column" }}>
                           <SectionTitle>Your Recommended Brand</SectionTitle>
-                          <div style={{ border:`1.5px solid ${B.gold}`, borderRadius:7, overflow:"hidden", background:B.goldLight }}>
+                          <div style={{ border:`1.5px solid ${B.gold}`, borderRadius:7, overflow:"hidden", background:B.goldLight, flex:1 }}>
                             <div style={{ background:B.gold, padding:"5px 11px" }}>
                               <div style={{ fontFamily:"Georgia,serif", fontSize:11, fontWeight:700, color:B.purple }}>{form.manufacturer} {totalEarsAffected === 1 ? "Hearing Aid" : "Hearing Aids"}</div>
                               <div style={{ fontSize:8, color:"rgba(74,32,96,0.75)" }}>{mfr.tagline}</div>
@@ -405,11 +405,11 @@
                       )}
 
                       {/* Next steps */}
-                      <div>
+                      <div style={{ display:"flex", flexDirection:"column" }}>
                         <SectionTitle>Your Next Steps</SectionTitle>
-                        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:5 }}>
+                        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:5, flex:1 }}>
                           {NEXT_STEPS.map((s,i)=>(
-                            <div key={i} style={{ background:B.purpleLight, borderRadius:6, padding:"7px 8px", borderLeft:`3px solid ${B.purple}` }}>
+                            <div key={i} style={{ background:B.purpleLight, borderRadius:6, padding:"7px 8px", borderLeft:`3px solid ${B.purple}`, display:"flex", flexDirection:"column" }}>
                               <div style={{ fontSize:14, marginBottom:2 }}>{s.icon}</div>
                               <div style={{ fontWeight:700, fontSize:8.5, color:B.purple, marginBottom:2 }}>{s.title}</div>
                               <div style={{ fontSize:8, color:"#4a5568", lineHeight:1.3 }}>
