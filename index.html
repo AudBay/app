@@ -2,44 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hearing Assessment Report</title>
+  <title>React Test</title>
 
   <!-- ✅ React -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  https://unpkg.com/react@18/umd/react.development.js</script>
+  https://unpkg.com/react-dom@18/umd/react-dom.development.js>
 
-  <!-- ✅ Babel (for JSX) -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- ✅ Babel -->
+  https://unpkg.com/@babel/standalone/babel.min.js
 </head>
 
-<body style="margin:0; background:#ddd;">
+<body>
   <div id="root"></div>
 
-  <!-- ✅ React App -->
   <script type="text/babel">
-    const B = {
-      purple: "#4a2060",
-      gold: "#c9a84c",
-      bg: "#f7f4fa",
-    };
-
     function App() {
       return (
-        <>
-          <style>{`
-            @media print {
-              @page { size: A4; margin: 0; }
-              body { margin: 0; }
-            }
+        <div style={{ padding: 40 }}>
+          <h1>✅ React is working</h1>
+          <p>If you can see this, everything is fixed.</p>
+        </div>
+      );
+    }
 
-            body {
-              font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            }
-          `}</style>
-
-          <div
-            style={{
-              width: "210mm",
-              height: "297mm",
-              margin: "0 auto",
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
