@@ -41,10 +41,10 @@
 
         const LOSS_DESCRIPTIONS = {
           Normal:   "Your hearing falls within the normal range. No hearing loss was detected.",
-          Mild:     "You may find it difficult to follow conversations in noisy environments or when voices are soft.",
-          Moderate: "Understanding speech without a hearing aid is likely difficult, especially in group settings or over the phone.",
+          Mild:     "You may find it difficult to follow conversations in noisy environments.",
+          Moderate: "Understanding speech without a hearing aid is likely difficult, especially in group settings.",
           Severe: "Hearing conversation without amplification is very difficult. Hearing aids are strongly recommended.",
-          Profound: "Understanding speech without powerful amplification is extremely challenging. Hearing aids are essential.",
+          Profound: "Understanding speech without powerful amplification is extremely challenging.",
         };
 
         const MFR = {
@@ -58,10 +58,10 @@
               "Industry-leading rechargeable battery performance",
               "Thrive app gives you full personalised control from your phone",
             ],
-            why: "Starkey is ideal for clients who want intelligent, adaptive technology that goes beyond hearing to actively support overall wellbeing.",
+            why: "Ideal for clients who want technology that supports overall wellbeing.",
           },
           Oticon: {
-            tagline: "BrainHearing technology that works with your brain, not just your ears",
+            tagline: "BrainHearing technology that works with your brain",
             known: "Rated among the world's most innovative hearing brands",
             highlights: [
               "BrainHearing approach supports the brain's natural sound processing",
@@ -70,7 +70,7 @@
               "Discreet, modern designs available in a wide range of styles",
               "Direct streaming compatible with iPhone and Android devices",
             ],
-            why: "Oticon is an outstanding choice for clients seeking natural, effortless hearing that significantly reduces listening fatigue day to day.",
+            why: "Outstanding choice for natural hearing that reduces listening fatigue.",
           },
           Widex: {
             tagline: "The purest, most natural sound quality available",
@@ -79,18 +79,18 @@
               "Renowned worldwide for the most natural sound reproduction",
               "PureSound technology eliminates the 'processed' sensation",
               "Zen therapy included, with gentle tones to ease tinnitus",
-              "Fastest signal processing on the market, with zero perceptible delay",
-              "SoundSense Learn AI adapts continuously to your personal preferences",
+              "Fastest signal processing on the market, with zero delay",
+              "SoundSense Learn AI adapts continuously to your preferences",
             ],
-            why: "Widex is the preferred choice for clients who are sensitive to sound quality and want hearing aids that feel completely natural and invisible.",
+            why: "The preferred choice for clients who want hearing aids that feel invisible.",
           },
         };
 
         const NEXT_STEPS = [
-          { icon: "🎧", title: "Book a Hearing Aid Trial", desc: "Experience the difference with a no-obligation trial. Hear the improvement for yourself before making any commitment." },
-          { icon: "💬", title: "Speak with Our Specialist", desc: "Our audiologist will guide you through every option to suit your lifestyle, hearing needs, and budget." },
-          { icon: "✨", title: "Connect Member Offer", desc: "Become a Connect Member today to receive **£150** off your new hearing aids and access exclusive ongoing benefits." },
-          { icon: "🌍", title: "Reconnect with the World", desc: "Better hearing means better conversations, stronger relationships, and long-term cognitive health." },
+          { icon: "🎧", title: "Book a Hearing Aid Trial", desc: "Experience the difference with a no-obligation trial. Hear the improvement for yourself." },
+          { icon: "💬", title: "Speak with Our Specialist", desc: "Our audiologist will guide you through every option to suit your lifestyle." },
+          { icon: "✨", title: "Connect Member Offer", desc: "Become a Connect Member today to receive **£150** off your new hearing aids." },
+          { icon: "🌍", title: "Reconnect with the World", desc: "Better hearing means better conversations and long-term cognitive health." },
         ];
 
         const Field = ({ label, children, span }) => (
@@ -116,7 +116,7 @@
 
         const SectionTitle = ({ children }) => (
           <div style={{ fontFamily:"Georgia,serif", fontSize:13, fontWeight:700, color:B.purple,
-            borderBottom:`2px solid ${B.purpleMid}`, paddingBottom:4, marginBottom:10 }}>
+            borderBottom:`2px solid ${B.purpleMid}`, paddingBottom:2, marginBottom:8 }}>
             {children}
           </div>
         );
@@ -126,20 +126,20 @@
           const pct   = {Normal:5,Mild:22,Moderate:46,Severe:70,Profound:93}[level] || 0;
           return (
             <div style={{ border:`1px solid ${B.border}`, borderRadius:7, overflow:"hidden" }}>
-              <div style={{ padding:"6px 12px", fontWeight:700, fontSize:10, textTransform:"uppercase",
-                letterSpacing:0.8, background: side==="left"?"#e8f0fb":"#fdeee3",
+              <div style={{ padding:"4px 10px", fontWeight:700, fontSize:9, textTransform:"uppercase",
+                background: side==="left"?"#e8f0fb":"#fdeee3",
                 color: side==="left"?"#1565c0":"#b85c1a" }}>
                 {label}
               </div>
-              <div style={{ padding:"10px 12px" }}>
-                <div style={{ fontFamily:"Georgia,serif", fontSize:16, fontWeight:700, color, marginBottom:1 }}>
+              <div style={{ padding:"8px 10px" }}>
+                <div style={{ fontFamily:"Georgia,serif", fontSize:14, fontWeight:700, color, marginBottom:1 }}>
                   {level||"—"} Loss
                 </div>
-                <div style={{ fontSize:10, color:B.muted, marginBottom:6 }}>{type||"—"}</div>
-                <div style={{ height:4, background:B.border, borderRadius:2, marginBottom:7, overflow:"hidden" }}>
+                <div style={{ fontSize:9, color:B.muted, marginBottom:4 }}>{type||"—"}</div>
+                <div style={{ height:3, background:B.border, borderRadius:2, marginBottom:5, overflow:"hidden" }}>
                   <div style={{ height:"100%", width:`${pct}%`, background:color, borderRadius:2 }} />
                 </div>
-                <div style={{ fontSize:10, color:"#4a5568", lineHeight:1.5 }}>
+                <div style={{ fontSize:9, color:"#4a5568", lineHeight:1.3 }}>
                   {level ? LOSS_DESCRIPTIONS[level] : ""}
                 </div>
               </div>
@@ -160,13 +160,13 @@
         );
 
         const PageHeader = ({ title, clientName, testDate, audiologistName, clientId }) => (
-          <div style={{ background:B.purple, padding:"24px 26px", flexShrink:0, textAlign: "center" }}>
-            <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:24, fontWeight:700, marginBottom:16 }}>
+          <div style={{ background:B.purple, padding:"18px 26px", flexShrink:0, textAlign: "center" }}>
+            <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:22, fontWeight:700, marginBottom:10 }}>
               Hearing Assessment Report
             </div>
-            <div style={{ display:"flex", flexDirection: "column", alignItems: "center", gap:6 }}>
+            <div style={{ display:"flex", flexDirection: "column", alignItems: "center", gap:4 }}>
                 <div style={{ color: "white", fontSize: 13, fontWeight: 600 }}>{title ? title + " " : ""}{clientName || "Client Name"}</div>
-                <div style={{ display: "flex", gap: 15, color: "rgba(255,255,255,0.7)", fontSize: 10, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                <div style={{ display: "flex", gap: 15, color: "rgba(255,255,255,0.7)", fontSize: 9, textTransform: "uppercase", letterSpacing: 0.5 }}>
                     <span>Date: {testDate}</span>
                     <span>Audiologist: {audiologistName}</span>
                     <span>Client ID: {clientId || "—"}</span>
@@ -176,13 +176,13 @@
         );
 
         const PageFooter = ({ audiologistName, dateStr, title, clientName, page }) => (
-          <div style={{ borderTop:`1px solid ${B.border}`, padding:"7px 26px", display:"flex",
-            justify:"space-between", alignItems:"center", background:"#fafbfc", 
-            position: "absolute", bottom: 0, left: 0, right: 0, height: "35px" }}>
-            <div style={{ fontSize:8.5, color:B.muted }}>
+          <div style={{ borderTop:`1px solid ${B.border}`, padding:"5px 26px", display:"flex",
+            justifyContent:"space-between", alignItems:"center", background:"#fafbfc", 
+            position: "absolute", bottom: 0, left: 0, right: 0, height: "30px" }}>
+            <div style={{ fontSize:8, color:B.muted }}>
               Prepared by {audiologistName} &bull; {dateStr} &bull; Prepared for {title} {clientName}
             </div>
-            <div style={{ fontSize:8.5, color:B.muted }}>Page {page} of 2</div>
+            <div style={{ fontSize:8, color:B.muted }}>Page {page} of 2</div>
           </div>
         );
 
@@ -223,64 +223,48 @@
             <>
               <style>{`
                 @media print {
-                  body { margin:0; background:white; -webkit-print-color-adjust: exact; }
-                  .no-print { display:none !important; }
+                  @page { size: A4; margin: 0; }
+                  body { margin: 0; background: white; -webkit-print-color-adjust: exact; }
+                  .no-print { display: none !important; }
                   .pdf-page {
-                    width:210mm !important; 
-                    height:296.5mm !important; 
-                    page-break-after:always; 
-                    box-shadow:none !important; 
-                    margin:0 !important;
+                    width: 210mm !important;
+                    height: 297mm !important;
+                    margin: 0 auto !important;
+                    padding: 0 !important;
                     position: relative !important;
-                    overflow:hidden !important;
-                    zoom: 0.98;
+                    page-break-after: always !important;
+                    overflow: hidden !important;
+                    box-shadow: none !important;
                   }
-                  .preview-shell { padding:0 !important; background:white !important; }
+                  .preview-shell { padding: 0 !important; background: white !important; }
                 }
-                @page { size:A4 portrait; margin:0; }
-                *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-                body { font-family:system-ui,sans-serif; background:${B.bg}; color:${B.text}; }
-                .seg-btn { padding:5px 10px; border-radius:14px; font-size:11px; font-weight:500;
-                  border:1.5px solid ${B.border}; background:white; color:${B.muted}; cursor:pointer; transition:all 0.15s; }
-                .seg-btn:hover { border-color:${B.purpleMid}; color:${B.purpleMid}; }
-                .seg-btn.sl { color:white; border-color:transparent; }
-                .seg-btn.st { background:${B.purpleLight}; border-color:${B.purpleMid}; color:${B.purpleMid}; font-weight:600; }
-                .mfr-btn { padding:13px 10px; border-radius:9px; border:2px solid ${B.border};
-                  background:white; cursor:pointer; transition:all 0.2s; text-align:center; width:100%; }
-                .mfr-btn:hover { border-color:${B.purpleMid}; transform:translateY(-1px); }
-                .mfr-btn.sm { border-color:${B.purple}; background:${B.purpleLight}; }
-                .gen-btn { width:100%; padding:13px; background:${B.purple}; color:white; border:none;
-                  border-radius:9px; font-size:14px; font-weight:700; cursor:pointer;
-                  box-shadow:0 4px 14px rgba(74,32,96,0.3); transition:all 0.2s; }
-                .gen-btn:hover:not(:disabled) { background:${B.purpleMid}; transform:translateY(-1px); }
-                .gen-btn:disabled { background:#ccc; box-shadow:none; cursor:not-allowed; }
+                *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+                body { font-family: system-ui, sans-serif; background: ${B.bg}; color: ${B.text}; }
+                .seg-btn { padding: 5px 10px; border-radius: 14px; font-size: 11px; font-weight: 500; border: 1.5px solid ${B.border}; background: white; color: ${B.muted}; cursor: pointer; transition: all 0.15s; }
+                .seg-btn.sl { color: white; border-color: transparent; }
+                .seg-btn.st { background: ${B.purpleLight}; border-color: ${B.purpleMid}; color: ${B.purpleMid}; font-weight: 600; }
+                .mfr-btn { padding: 13px 10px; border-radius: 9px; border: 2px solid ${B.border}; background: white; cursor: pointer; text-align: center; width: 100%; }
+                .mfr-btn.sm { border-color: ${B.purple}; background: ${B.purpleLight}; }
+                .gen-btn { width: 100%; padding: 13px; background: ${B.purple}; color: white; border: none; border-radius: 9px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 14px rgba(74,32,96,0.3); }
+                .gen-btn:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
               `}</style>
 
               <div style={{ minHeight:"100vh" }}>
-                <div className="no-print" style={{ background:B.purple, padding:"14px 24px",
-                  display:"flex", alignItems:"center", gap:14 }}>
-                  <div style={{ width:38, height:38, background:B.purpleMid, borderRadius:9,
-                    display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>🦻</div>
-                  <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:18, fontWeight:700 }}>
-                    Hearing Assessment Report
-                  </div>
+                <div className="no-print" style={{ background:B.purple, padding:"14px 24px", display:"flex", alignItems:"center", gap:14 }}>
+                  <div style={{ width:38, height:38, background:B.purpleMid, borderRadius:9, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>🦻</div>
+                  <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:18, fontWeight:700 }}>Hearing Assessment Report</div>
                 </div>
 
-                <div className="no-print" style={{ background:"white", borderBottom:`1px solid ${B.border}`,
-                  display:"flex", padding:"0 24px" }}>
+                <div className="no-print" style={{ background:"white", borderBottom:`1px solid ${B.border}`, display:"flex", padding:"0 24px" }}>
                   {["form", done&&"preview"].filter(Boolean).map(t=>(
-                    <button key={t} onClick={()=>setTab(t)} style={{ padding:"11px 16px", fontSize:12,
-                      fontWeight:600, background:"none", border:"none",
-                      borderBottom: tab===t?`2px solid ${B.purple}`:"2px solid transparent",
-                      color: tab===t?B.purple:B.muted, cursor:"pointer" }}>
+                    <button key={t} onClick={()=>setTab(t)} style={{ padding:"11px 16px", fontSize:12, fontWeight:600, background:"none", border:"none", borderBottom: tab===t?`2px solid ${B.purple}`:"2px solid transparent", color: tab===t?B.purple:B.muted, cursor:"pointer" }}>
                       {t==="form"?"📋 Assessment Form":"📄 PDF Preview"}
                     </button>
                   ))}
                 </div>
 
                 {tab==="form" && (
-                  <div style={{ maxWidth:700, margin:"0 auto", padding:"24px 18px",
-                    display:"flex", flexDirection:"column", gap:16 }}>
+                  <div style={{ maxWidth:700, margin:"0 auto", padding:"24px 18px", display:"flex", flexDirection:"column", gap:16 }}>
                     <Card icon="👤" title="Client & Clinic Details">
                       <div style={{ display:"grid", gridTemplateColumns:"100px 1fr", gap:12 }}>
                         <Field label="Title"><Select value={form.title} onChange={e=>set("title",e.target.value)}>{TITLES.map(t=><option key={t} value={t}>{t}</option>)}</Select></Field>
@@ -297,17 +281,13 @@
                       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
                         {[["leftEar","left","Left Ear"],["rightEar","right","Right Ear"]].map(([key,side,label])=>(
                           <div key={key} style={{ border:`1.5px solid ${B.border}`, borderRadius:9, overflow:"hidden" }}>
-                            <div style={{ padding:"8px 12px", fontWeight:700, fontSize:11,
-                              background:side==="left"?"#e8f0fb":"#fdeee3",
-                              color:side==="left"?"#1565c0":"#b85c1a" }}>{label}</div>
+                            <div style={{ padding:"8px 12px", fontWeight:700, fontSize:11, background:side==="left"?"#e8f0fb":"#fdeee3", color:side==="left"?"#1565c0":"#b85c1a" }}>{label}</div>
                             <div style={{ padding:12, display:"flex", flexDirection:"column", gap:10 }}>
                               <div>
                                 <div style={{ fontSize:9, fontWeight:700, color:B.muted, textTransform:"uppercase", letterSpacing:0.5, marginBottom:5 }}>Degree of Loss *</div>
                                 <div style={{ display:"flex", flexWrap:"wrap", gap:4 }}>
                                   {LOSS_LEVELS.map(l=>(
-                                    <button key={l} className={`seg-btn ${form[key].level===l?"sl":""}`}
-                                      style={form[key].level===l?{backgroundColor:LOSS_COLORS[l]}:{}}
-                                      onClick={()=>setEar(key,"level",l)}>{l}</button>
+                                    <button key={l} className={`seg-btn ${form[key].level===l?"sl":""}`} style={form[key].level===l?{backgroundColor:LOSS_COLORS[l]}:{}} onClick={()=>setEar(key,"level",l)}>{l}</button>
                                   ))}
                                 </div>
                               </div>
@@ -315,8 +295,7 @@
                                 <div style={{ fontSize:9, fontWeight:700, color:B.muted, textTransform:"uppercase", letterSpacing:0.5, marginBottom:5 }}>Type of Loss *</div>
                                 <div style={{ display:"flex", flexWrap:"wrap", gap:4 }}>
                                   {LOSS_TYPES.map(t=>(
-                                    <button key={t} className={`seg-btn ${form[key].type===t?"st":""}`}
-                                      onClick={()=>setEar(key,"type",t)}>{t}</button>
+                                    <button key={t} className={`seg-btn ${form[key].type===t?"st":""}`} onClick={()=>setEar(key,"type",t)}>{t}</button>
                                   ))}
                                 </div>
                               </div>
@@ -338,56 +317,33 @@
                     </Card>
 
                     <Card icon="📝" title="Audiologist Notes" optional>
-                      <textarea placeholder="e.g. Client reports difficulty in noisy environments."
-                        value={form.notes} onChange={e=>set("notes",e.target.value)}
-                        style={{ width:"100%", minHeight:64, padding:"8px 11px", border:`1.5px solid ${B.border}`,
-                          borderRadius:6, fontSize:12, fontFamily:"inherit", color:B.text,
-                          background:B.bg, resize:"vertical" }} />
+                      <textarea placeholder="e.g. Client reports difficulty in noisy environments." value={form.notes} onChange={e=>set("notes",e.target.value)} style={{ width:"100%", minHeight:64, padding:"8px 11px", border:`1.5px solid ${B.border}`, borderRadius:6, fontSize:12, fontFamily:"inherit", color:B.text, background:B.bg, resize:"vertical" }} />
                     </Card>
 
-                    <button className="gen-btn" disabled={!valid}
-                      onClick={()=>{ setDone(true); setTab("preview"); }}>
-                      📄 Generate PDF Report
-                    </button>
+                    <button className="gen-btn" disabled={!valid} onClick={()=>{ setDone(true); setTab("preview"); }}>📄 Generate PDF Report</button>
                   </div>
                 )}
 
                 {tab==="preview" && done && (
-                  <div className="preview-shell" style={{ padding:"20px 16px", display:"flex",
-                    flexDirection:"column", alignItems:"center", gap:16, background:"#ddd5e8" }}>
+                  <div className="preview-shell" style={{ padding:"20px 16px", display:"flex", flexDirection:"column", alignItems:"center", gap:16, background:"#ddd5e8" }}>
 
                     <div className="no-print" style={{ display:"flex", gap:10 }}>
-                      <button onClick={()=>window.print()} style={{ background:B.purple, color:"white",
-                        border:"none", borderRadius:7, padding:"9px 20px", fontSize:13, fontWeight:700, cursor:"pointer" }}>
-                        🖨️ Print / Save as PDF
-                      </button>
-                      <button onClick={()=>setTab("form")} style={{ background:"white", color:B.purple,
-                        border:`1px solid ${B.purpleBorder}`, borderRadius:7, padding:"9px 16px", fontSize:12, cursor:"pointer" }}>
-                        ← Edit Form
-                      </button>
+                      <button onClick={()=>window.print()} style={{ background:B.purple, color:"white", border:"none", borderRadius:7, padding:"9px 20px", fontSize:13, fontWeight:700, cursor:"pointer" }}>🖨️ Print / Save as PDF</button>
+                      <button onClick={()=>setTab("form")} style={{ background:"white", color:B.purple, border:`1px solid ${B.purpleBorder}`, borderRadius:7, padding:"9px 16px", fontSize:12, cursor:"pointer" }}>← Edit Form</button>
                     </div>
 
-                    <div className="pdf-page" style={{ width:"210mm", background:"white",
-                      boxShadow:"0 4px 28px rgba(74,32,96,0.18)", display:"flex", flexDirection:"column" }}>
-                      <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr}
-                        audiologistName={form.audiologistName} clientId={form.clientId} />
+                    {/* PAGE 1 */}
+                    <div className="pdf-page" style={{ background:"white", display:"flex", flexDirection:"column" }}>
+                      <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr} audiologistName={form.audiologistName} clientId={form.clientId} />
                       <GoldBar />
-                      <div style={{ padding:"14px 26px", flex:1, display:"flex", flexDirection:"column", gap:10 }}>
+                      <div style={{ padding:"15px 26px", flex:1, display:"flex", flexDirection:"column", gap:12 }}>
                         <div>
                           <SectionTitle>Your Hearing Test Results</SectionTitle>
-                          <div style={{ display:"flex", gap:12, marginBottom:8, flexWrap:"wrap" }}>
-                            {Object.entries(LOSS_COLORS).map(([k,c])=>(
-                              <div key={k} style={{ display:"flex", alignItems:"center", gap:4, fontSize:9.5, color:B.muted }}>
-                                <div style={{ width:7, height:7, borderRadius:"50%", background:c }} />{k}
-                              </div>
-                            ))}
-                          </div>
                           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:8 }}>
                             <EarCard level={form.leftEar.level} type={form.leftEar.type} side="left" label="Left Ear" />
                             <EarCard level={form.rightEar.level} type={form.rightEar.type} side="right" label="Right Ear" />
                           </div>
-                          <div style={{ background:"#fff8e1", border:"1px solid #f0c96e", borderRadius:6,
-                              padding:"8px 12px", fontSize:10.5, color:"#5a3e00", lineHeight:1.5 }}>
+                          <div style={{ background:"#fff8e1", border:"1px solid #f0c96e", borderRadius:6, padding:"8px 12px", fontSize:10, color:"#5a3e00", lineHeight:1.4 }}>
                               <strong>Summary:</strong> {recommendationText}
                           </div>
                         </div>
@@ -397,13 +353,12 @@
                             {[
                               ["What causes it?","Most hearing loss is sensorineural, caused by gradual changes to the hair cells in the inner ear."],
                               ["Can it worsen?","Untreated hearing loss can gradually worsen. Acting early gives the best outcomes."],
-                              ["How hearing aids help","Modern hearing aids amplify and clarify sound, making conversation feel effortless again."],
-                              ["The cognitive link","Research shows that treating hearing loss helps reduce the risk of cognitive decline."],
+                              ["How hearing aids help","Modern hearing aids amplify and clarify sound, making conversation feel effortless."],
+                              ["The cognitive link","Treating hearing loss helps reduce the risk of cognitive decline and isolation."]
                             ].map(([title,body])=>(
-                              <div key={title} style={{ background:B.purpleLight, borderRadius:6,
-                                padding:"8px 10px", border:`1px solid ${B.purpleBorder}` }}>
-                                <div style={{ fontWeight:700, fontSize:10.5, color:B.purple, marginBottom:2 }}>{title}</div>
-                                <div style={{ fontSize:9.5, color:"#4a5568", lineHeight:1.4 }}>{body}</div>
+                              <div key={title} style={{ background:B.purpleLight, borderRadius:6, padding:"8px 10px", border:`1px solid ${B.purpleBorder}` }}>
+                                <div style={{ fontWeight:700, fontSize:10, color:B.purple, marginBottom:2 }}>{title}</div>
+                                <div style={{ fontSize:9, color:"#4a5568", lineHeight:1.3 }}>{body}</div>
                               </div>
                             ))}
                           </div>
@@ -411,41 +366,33 @@
                         {form.notes && (
                           <div style={{marginTop: 5}}>
                             <SectionTitle>Audiologist Notes</SectionTitle>
-                            <div style={{ background:"#f8fafc", border:`1px solid ${B.border}`, borderRadius:6,
-                              padding:"8px 12px", fontSize:10.5, color:"#2d3748", lineHeight:1.5 }}>
+                            <div style={{ background:"#f8fafc", border:`1px solid ${B.border}`, borderRadius:6, padding:"8px 12px", fontSize:10, color:"#2d3748", lineHeight:1.4 }}>
                               {form.notes}
                             </div>
                           </div>
                         )}
                       </div>
-                      <PageFooter audiologistName={form.audiologistName} dateStr={dateStr}
-                        title={form.title} clientName={form.clientName} page="1" />
+                      <PageFooter audiologistName={form.audiologistName} dateStr={dateStr} title={form.title} clientName={form.clientName} page="1" />
                     </div>
 
-                    <div className="pdf-page" style={{ width:"210mm", background:"white",
-                      boxShadow:"0 4px 28px rgba(74,32,96,0.18)", display:"flex", flexDirection:"column" }}>
-                      <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr}
-                        audiologistName={form.audiologistName} clientId={form.clientId} />
+                    {/* PAGE 2 */}
+                    <div className="pdf-page" style={{ background:"white", display:"flex", flexDirection:"column" }}>
+                      <PageHeader title={form.title} clientName={form.clientName} testDate={dateStr} audiologistName={form.audiologistName} clientId={form.clientId} />
                       <GoldBar />
-                      <div style={{ padding:"14px 26px", flex:1, display:"flex", flexDirection:"column", gap:14 }}>
+                      <div style={{ padding:"15px 26px", flex:1, display:"flex", flexDirection:"column", gap:15 }}>
                         {mfr && (
                           <div>
-                            <SectionTitle>Your Recommended Hearing Aid Brand</SectionTitle>
+                            <SectionTitle>Your Recommended Brand</SectionTitle>
                             <div style={{ border:`1.5px solid ${B.gold}`, borderRadius:9, overflow:"hidden", background:B.goldLight }}>
-                              <div style={{ background:B.gold, padding:"9px 15px" }}>
-                                <div style={{ fontFamily:"Georgia,serif", fontSize:16, fontWeight:700, color:B.purple }}>
-                                  {form.manufacturer} {totalEarsAffected === 1 ? "Hearing Aid" : "Hearing Aids"}
-                                </div>
-                                <div style={{ fontSize:10.5, color:"rgba(74,32,96,0.75)", marginTop:1 }}>{mfr.tagline}</div>
+                              <div style={{ background:B.gold, padding:"8px 15px" }}>
+                                <div style={{ fontFamily:"Georgia,serif", fontSize:15, fontWeight:700, color:B.purple }}>{form.manufacturer} {totalEarsAffected === 1 ? "Hearing Aid" : "Hearing Aids"}</div>
+                                <div style={{ fontSize:10, color:"rgba(74,32,96,0.75)" }}>{mfr.tagline}</div>
                               </div>
-                              <div style={{ padding:"11px 15px" }}>
-                                <div style={{ fontSize:10.5, color:"#2d3748", lineHeight:1.5, fontStyle:"italic",
-                                  marginBottom:8, paddingBottom:8, borderBottom:`1px solid ${B.goldBorder}` }}>
-                                  {mfr.why}
-                                </div>
+                              <div style={{ padding:"10px 15px" }}>
+                                <div style={{ fontSize:10, color:"#2d3748", lineHeight:1.4, fontStyle:"italic", marginBottom:8, paddingBottom:8, borderBottom:`1px solid ${B.goldBorder}` }}>{mfr.why}</div>
                                 <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"4px 14px" }}>
                                   {mfr.highlights.map((h,i)=>(
-                                    <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:6, fontSize:10, color:"#2d3748" }}>
+                                    <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:6, fontSize:9, color:"#2d3748" }}>
                                       <div style={{ width:4, height:4, borderRadius:"50%", background:B.gold, marginTop:5 }} />
                                       <span>{h}</span>
                                     </div>
@@ -460,19 +407,12 @@
                           <SectionTitle>Your Next Steps</SectionTitle>
                           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
                             {NEXT_STEPS.map((s,i)=>(
-                              <div key={i} style={{ 
-                                background: B.purpleLight, 
-                                borderRadius:7, 
-                                padding:"10px 11px", 
-                                borderLeft: `3px solid ${B.purple}`,
-                                display: "flex",
-                                flexDirection: "column"
-                              }}>
+                              <div key={i} style={{ background: B.purpleLight, borderRadius:7, padding:"10px 11px", borderLeft: `3px solid ${B.purple}` }}>
                                 <div style={{ fontSize:18, marginBottom:4 }}>{s.icon}</div>
-                                <div style={{ fontWeight:700, fontSize:10.5, color: B.purple, marginBottom:2 }}>{s.title}</div>
-                                <div style={{ fontSize:9.5, color:"#4a5568", lineHeight:1.4 }}>
+                                <div style={{ fontWeight:700, fontSize:10, color: B.purple, marginBottom:2 }}>{s.title}</div>
+                                <div style={{ fontSize:9, color:"#4a5568", lineHeight:1.3 }}>
                                     {s.title === "Connect Member Offer" ? (
-                                        <span>Become a Connect Member today to receive <strong>£150</strong> off your new hearing aids and access exclusive ongoing benefits.</span>
+                                        <span>Become a Connect Member to receive <strong>£150</strong> off your new aids.</span>
                                     ) : s.desc}
                                 </div>
                               </div>
@@ -480,19 +420,12 @@
                           </div>
                         </div>
 
-                        <div style={{ background:B.purple, borderRadius:9, padding:"12px 16px", display:"flex", alignItems:"center", gap:13, marginTop: "auto", marginBottom: "40px" }}>
-                          <div style={{ color:"rgba(255,255,255,0.9)", lineHeight:1.4 }}>
-                            <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:12, fontWeight:700, marginBottom:2 }}>
-                              You are not alone.
-                            </div>
-                            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:9.5, lineHeight:1.5 }}>
-                              Modern hearing technology is smaller, smarter and more natural-sounding than ever before. Most clients notice a remarkable difference from day one.
-                            </div>
-                          </div>
+                        <div style={{ background:B.purple, borderRadius:9, padding:"12px 16px", marginTop: "auto", marginBottom: "40px" }}>
+                            <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:12, fontWeight:700, marginBottom:2 }}>You are not alone.</div>
+                            <div style={{ color:"rgba(255,255,255,0.65)", fontSize:9.5, lineHeight:1.4 }}>Modern hearing technology is smaller, smarter and more natural-sounding than ever before.</div>
                         </div>
                       </div>
-                      <PageFooter audiologistName={form.audiologistName} dateStr={dateStr}
-                        title={form.title} clientName={form.clientName} page="2" />
+                      <PageFooter audiologistName={form.audiologistName} dateStr={dateStr} title={form.title} clientName={form.clientName} page="2" />
                     </div>
                   </div>
                 )}
