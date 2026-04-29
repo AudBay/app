@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hearing Assessment Report</title>
 
+  <!-- React -->
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <!-- Babel for JSX -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 
@@ -16,9 +19,9 @@
 <script type="text/babel">
 const { useState } = React;
 
-/* ===========================
-   BRAND + CLINICAL CONSTANTS
-=========================== */
+/* =====================
+   BRAND + CLINICAL DATA
+===================== */
 const B = {
   purple:"#4a2060", purpleMid:"#6b3a8a", purpleLight:"#f3edf8",
   purpleBorder:"#d4b8e8", gold:"#c9a84c", goldLight:"#fdf8ee",
@@ -26,117 +29,3 @@ const B = {
   border:"#e2e8f0", bg:"#f7f4fa", white:"#ffffff"
 };
 
-const TITLES = ["Mr","Mrs","Ms","Miss","Dr","Prof"];
-const LOSS_LEVELS = ["Normal","Mild","Moderate","Severe","Profound"];
-const LOSS_TYPES = ["No Loss","Sensorineural","Conductive","Mixed"];
-const MANUFACTURERS = ["Starkey","Oticon","Widex"];
-
-const LOSS_COLORS = {
-  Normal:"#2e7d5e", Mild:"#f0a500",
-  Moderate:"#e07b30", Severe:"#c94040",
-  Profound:"#7b1fa2"
-};
-
-const LOSS_DESCRIPTIONS = {
-  Normal:"Hearing sensitivity is within expected limits for speech and everyday sounds.",
-  Mild:"Soft speech and distant conversation may be harder to hear, especially with background noise.",
-  Moderate:"Normal conversation becomes difficult without amplification, particularly in groups.",
-  Severe:"Most speech sounds are difficult to hear clearly without hearing aids.",
-  Profound:"Speech understanding without advanced amplification is extremely limited."
-};
-
-/* ===========================
-   SMALL UI COMPONENTS
-=========================== */
-
-const SectionTitle = ({children}) => (
-  <div style={{fontFamily:"Georgia,serif", fontSize:14, fontWeight:700,
-    color:B.purple, borderBottom:`2px solid ${B.purpleMid}`,
-    paddingBottom:3, marginBottom:6}}>
-    {children}
-  </div>
-);
-
-const PageHeader = ({title,clientName,testDate,audiologistName,clientId}) => (
-  <div style={{background:B.purple,padding:"14px 22px",textAlign:"center"}}>
-    <div style={{fontFamily:"Georgia,serif",fontSize:19,fontWeight:700,color:"white"}}>
-      Hearing Assessment Report
-    </div>
-    <div style={{fontSize:13,fontWeight:600,color:"white"}}>
-      {title} {clientName}
-    </div>
-    <div style={{marginTop:4,fontSize:9,color:"rgba(255,255,255,0.75)",
-      display:"flex", justifyContent:"center", gap:14, textTransform:"uppercase"}}>
-      <span>Date: {testDate}</span>
-      <span>Audiologist: {audiologistName}</span>
-      <span>ID: {clientId||"—"}</span>
-    </div>
-  </div>
-);
-
-const EarCard = ({label,level,type,color}) => (
-  <div style={{border:`1.5px solid ${B.border}`, borderRadius:8,padding:10}}>
-    <div style={{fontSize:11,fontWeight:700,color:B.muted,marginBottom:4}}>
-      {label}
-    </div>
-    <div style={{fontFamily:"Georgia,serif",fontSize:15,fontWeight:700,color}}>
-      {level} Hearing Loss
-    </div>
-    <div style={{fontSize:10.5,color:B.muted,marginBottom:6}}>
-      Type: {type}
-    </div>
-    <div style={{height:4,background:B.border,borderRadius:4,marginBottom:6}}>
-      <div style={{
-        height:"100%",width:{
-          Normal:"5%",Mild:"25%",Moderate:"50%",Severe:"75%",Profound:"95%"
-        }[level],background:color,borderRadius:4}}/>
-    </div>
-    <div style={{fontSize:10.5,lineHeight:1.45}}>
-      {LOSS_DESCRIPTIONS[level]}
-    </div>
-  </div>
-);
-
-/* ===========================
-   MAIN APP
-=========================== */
-function App() {
-  const [form] = useState({
-    title:"Mr",
-    clientName:"Example Client",
-    clientId:"HC‑10291",
-    audiologistName:"Dr Sarah O'Brien",
-    testDate:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}),
-    leftEar:{level:"Moderate",type:"Sensorineural"},
-    rightEar:{level:"Severe",type:"Sensorineural"},
-    manufacturer:"Oticon",
-    notes:"Client reports increasing difficulty following conversation in social environments."
-  });
-
-  const totalEarsAffected =
-    (form.leftEar.level!=="Normal") + (form.rightEar.level!=="Normal");
-
-  const recommendation =
-    totalEarsAffected === 2
-      ? "Based on your assessment, hearing aids are recommended for both ears."
-      : "A hearing aid is recommended for one ear only.";
-
-  return (
-<>
-<style>{`
-@media print {
-  @page { size:A4; margin:0; }
-  body { margin:0; }
-  .no-print { display:none; }
-}
-body { font-family:Inter,system-ui,sans-serif; background:#ddd; }
-`}</style>
-
-<div style={{
-  width:"210mm", minHeight:"297mm", margin:"auto",
-  background:"white", display:"flex", flexDirection:"column"
-}}>
-  <PageHeader {...form}/>
-  <div style={{height:3,background:`linear-gradient(90deg,${B.gold},${B.goldLight},${B.gold})`}}/>
-
-  <div style={{
