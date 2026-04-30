@@ -40,7 +40,9 @@ const B = {
 const TITLES = ["Mr","Mrs","Ms","Miss","Dr","Prof","Rev"];
 const LOSS_LEVELS = ["Normal","Mild","Moderate","Severe","Profound"];
 const LOSS_TYPES  = ["No Loss","Sensorineural","Conductive","Mixed"];
-const MANUFACTURERS = ["Starkey","Oticon","Widex"];
+
+// ✅ CHANGE 1: Rexton added
+const MANUFACTURERS = ["Starkey","Oticon","Widex","Rexton"];
 
 const LOSS_COLORS = { Normal:"#2e7d5e", Mild:"#f0a500", Moderate:"#e07b30", Severe:"#c94040", Profound:"#7b1fa2" };
 const LOSS_PCT    = { Normal:5, Mild:22, Moderate:46, Severe:70, Profound:93 };
@@ -90,6 +92,19 @@ const MFR = {
     ],
     why:"The preferred choice for clients who want hearing aids that feel truly invisible.",
   },
+  // ✅ CHANGE 1: Rexton manufacturer data
+  Rexton: {
+    tagline:"Premium hearing technology with outstanding value",
+    known:"Trusted German engineering with Signia platform technology",
+    highlights:[
+      "Powered by the proven Signia platform for reliable performance",
+      "Own Voice Processing eliminates the 'own voice' effect naturally",
+      "Bluetooth connectivity for direct streaming from phones and TVs",
+      "Rechargeable and traditional battery options available",
+      "TeleCare remote fine-tuning from the comfort of your home",
+    ],
+    why:"Excellent choice for clients seeking premium German-engineered performance at accessible price points.",
+  },
 };
 
 const NEXT_STEPS = [
@@ -100,8 +115,9 @@ const NEXT_STEPS = [
 ];
 
 const HEARING_FACTS = [
-  { icon:"🧠", title:"The brain-hearing link", body:"Untreated hearing loss increases dementia risk by up to 5×. Early treatment is the single most effective lifestyle intervention for brain health." },
-  { icon:"👥", title:"You are not alone", body:"Over 11 million people in the UK live with hearing loss — that's 1 in 6. It is the third most common health condition in the world." },
+  // ✅ CHANGE 2: Brain-hearing fact toned down — removed the exaggerated "5x" claim
+  { icon:"🧠", title:"The brain-hearing link", body:"Research consistently links untreated hearing loss with a higher risk of cognitive decline. Treating hearing loss early is considered one of the most impactful steps you can take for long-term brain health." },
+  { icon:"👥", title:"More common than you think", body:"Over 11 million people in the UK live with hearing loss — that's 1 in 6. It is the third most common health condition in the world." },
   { icon:"⏱", title:"Average delay is 10 years", body:"Most people wait a decade between noticing hearing loss and seeking help. Acting earlier leads to significantly better long-term outcomes." },
   { icon:"🔋", title:"Modern aids are remarkable", body:"Today's hearing aids are smaller than ever, with rechargeable batteries, Bluetooth streaming, AI sound processing, and app-based personalisation." },
 ];
@@ -277,11 +293,12 @@ function App() {
             </Card>
 
             <Card icon="🎧" title="Recommended Manufacturer *">
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:12 }}>
+              {/* ✅ Updated to 4 columns to fit Rexton */}
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr 1fr", gap:10 }}>
                 {MANUFACTURERS.map(m=>(
                   <button key={m} className={`mfr-btn ${form.manufacturer===m?"sel":""}`} onClick={()=>set("manufacturer",m)}>
-                    <div style={{ fontWeight:700, fontSize:14, color:form.manufacturer===m?"#4a2060":"#1a1a2e", marginBottom:4 }}>{m}</div>
-                    <div style={{ fontSize:11, color:"#6b7280" }}>{MFR[m].known}</div>
+                    <div style={{ fontWeight:700, fontSize:13, color:form.manufacturer===m?"#4a2060":"#1a1a2e", marginBottom:4 }}>{m}</div>
+                    <div style={{ fontSize:10, color:"#6b7280" }}>{MFR[m].known}</div>
                   </button>
                 ))}
               </div>
@@ -416,11 +433,11 @@ function App() {
                   </div>
                 </div>
 
-                {/* Footer */}
+                {/* ✅ CHANGE 3: Footer — replaced "You are not alone" with a privacy/commitment message */}
                 <div style={{ background:"#4a2060", borderRadius:8, padding:"9px 16px", display:"flex", alignItems:"center", justifyContent:"space-between", flexShrink:0 }}>
                   <div>
-                    <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:13, fontWeight:700, marginBottom:2 }}>You are not alone.</div>
-                    <div style={{ color:"rgba(255,255,255,0.7)", fontSize:10.5, lineHeight:1.4 }}>Modern hearing technology is smaller, smarter, and more natural-sounding than ever before. We are here to help.</div>
+                    <div style={{ fontFamily:"Georgia,serif", color:"white", fontSize:13, fontWeight:700, marginBottom:2 }}>Your hearing. Your future. Our commitment.</div>
+                    <div style={{ color:"rgba(255,255,255,0.7)", fontSize:10.5, lineHeight:1.4 }}>This report is confidential and prepared exclusively for you. Our team is dedicated to supporting your hearing health every step of the way.</div>
                   </div>
                   <div style={{ color:"rgba(255,255,255,0.35)", fontSize:9, textAlign:"right" }}>Hearing Assessment Report<br/>Confidential — {dateStr}</div>
                 </div>
