@@ -261,7 +261,7 @@
           </div>
           {(form.clientId || form.audiologistName || form.notes || form.leftEar.level || form.rightEar.level) && (
             <button
-              onClick={()=>{ if(window.confirm("Clear all entered data for this patient? This cannot be undone.")) resetForm(); }}
+              onClick={()=>{ if(window.confirm("Clear all entered data for this client? This cannot be undone.")) resetForm(); }}
               style={{ background:"none", border:"none", color:"var(--purple)", fontSize:12, fontWeight:600, cursor:"pointer", textDecoration:"underline", padding:"8px 16px" }}
             >
               🗑️ Clear form
@@ -352,7 +352,7 @@
             <div className="preview-actions no-print">
               <button className="print-btn" onClick={()=>window.print()}>🖨️ Print / Save as PDF</button>
               <button className="edit-btn" onClick={()=>setTab("form")}>← Edit Form</button>
-              <button className="edit-btn" onClick={()=>{ if(window.confirm("Clear this form and start a new patient? Make sure you have already saved/printed this report if needed.")) resetForm(); }}>🗑️ New Patient / Clear Form</button>
+              <button className="edit-btn" onClick={()=>{ if(window.confirm("Clear this form and start a new client? Make sure you have already saved/printed this report if needed.")) resetForm(); }}>🗑️ New client / Clear Form</button>
             </div>
 
             <div className="pdf-page">
